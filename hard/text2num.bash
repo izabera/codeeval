@@ -15,8 +15,12 @@ parsem () {
       (( num = 1000000 * nums[${words[0]}] ))
       words=("${words[@]:2}") ;;
 
-    "${words[2]}") # 30 3 mln
-      (( num = 1000000 * (nums[${words[0]}] + nums[${words[1]}]) ))
+    "${words[2]}") # 30 3 mln   or   3 hun mln
+      if [[ ${words[1]} = hundred ]]; then
+        (( num = 100000000 * nums[${words[0]}] ))
+      else
+        (( num = 1000000 * (nums[${words[0]}] + nums[${words[1]}]) ))
+      fi
       words=("${words[@]:3}") ;;
 
     "${words[3]}") # 3 hun 3 mln
@@ -35,8 +39,12 @@ parsek () {
       (( num += 1000 * nums[${words[0]}] ))
       words=("${words[@]:2}") ;;
 
-    "${words[2]}") # 30 3 thou
-      (( num += 1000 * (nums[${words[0]}] + nums[${words[1]}]) ))
+    "${words[2]}") # 30 3 thou   or   3 hun thou
+      if [[ ${words[1]} = hundred ]]; then
+        (( num += 100000 * nums[${words[0]}] ))
+      else
+        (( num += 1000 * (nums[${words[0]}] + nums[${words[1]}]) ))
+      fi
       words=("${words[@]:3}") ;;
 
     "${words[3]}") # 3 hun 3 thou
@@ -55,7 +63,11 @@ parseu () {
       (( num += nums[${words[0]}] )) ;;
 
     2) # 30 3
-      (( num += nums[${words[0]}] + nums[${words[1]}] )) ;;
+      if [[ ${words[1]} = hundred ]]; then
+        (( num += 100 * nums[${words[0]}] ))
+      else
+        (( num += nums[${words[0]}] + nums[${words[1]}] ))
+      fi ;;
 
     3) # 3 hun 3
       (( num += 100 * nums[${words[0]}] + nums[${words[2]}] )) ;;
