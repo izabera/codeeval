@@ -1,4 +1,5 @@
 #!/bin/bash
+LANG=C
 col=0 row=0 mode=o
 
 interpret () {
