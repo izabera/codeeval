@@ -1,4 +1,5 @@
 #!/bin/bash
+LANG=C
 exec < "$1"
 read -r num
 while read -r; do
@@ -6,7 +7,6 @@ while read -r; do
 done
 lines=("${lines[@]}")
 
-while (( num -- )); do
-  printf "%s\n" "${lines[-1]}"
-  unset "lines[${#lines[@]}-1]"
+while (( i++ , num -- )); do
+  printf "%s\n" "${lines[-i]}"
 done
