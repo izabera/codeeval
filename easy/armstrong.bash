@@ -1,8 +1,9 @@
 #!/bin/bash
-LANG=C ans=(False True)
+LANG=C
 while read -r; do
-  for (( len = ${#REPLY}, sum = 0, i = 0; i < len; i++ )) do
-    (( sum += ${REPLY:i:1} ** len ))
+  exp=${#REPLY}
+  for (( i = sum = 0; i < exp; i++ )) do
+    (( sum += ${REPLY:i:1} ** exp ))
   done
-  echo "${ans[sum == REPLY]}"
+  (( sum == REPLY )) && echo True || echo False
 done < "$1"
