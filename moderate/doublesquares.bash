@@ -6,7 +6,7 @@ read discarded   # why the fuck are you even giving me this number
 # this is the only challenge that does this and it took me a while to realize it
 
 while read -r num; do
-# this solution is too slow
+# this solution is too slow, takes 9s on their server and scores 32.something
 # rewritten in bc below
 
 #  # dijkstra's algorithm
